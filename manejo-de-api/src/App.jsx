@@ -1,33 +1,59 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Render } from './components/render.jsx'
+import { useSearch } from './hooks/useSearch.js'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('Players')
+  const { players, getPlayer, loading } = useSearch({ search, category })
+  
+
+  const handleClick = () => {
+    if (category === 'Players') {
+      setCategory('Teams')
+      return
+    }
+    if (category === 'Teams') {
+      setCategory('Events')
+      return
+    }
+    if (category === 'Events') {
+      setCategory('Players')
+      return
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    getPlayer({search, category})
+    
+  }
+  const handleChange = (event) => {
+    const newSearch = event.target.value
+    setSearch(newSearch)
+    
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header>
+        <h1>Manejo de API</h1>
+        <form className='form' onSubmit={handleSubmit}>
+          <input onChange={handleChange} value={search} name='query' placeholder='Avengers, Star Wars, The Matrix...'/>
+          <button type='submit'>Buscar</button>
+          <button onClick={() => handleClick()}>by{category}</button>
+        </form>
+      </header>
+
+      <main>
+        {loading? <p>Realiza una busqueda</p> : <Render playersTeamsEvents={players} />}
+      </main>
+
+      
+      
+      
+      
     </>
   )
 }
