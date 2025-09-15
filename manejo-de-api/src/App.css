@@ -1,3 +1,21 @@
+/* --- RESET CSS --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  background: #181a20;
+  color: #e0e0e0;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +23,240 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* --- LISTAS GENERALES --- */
+section {
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* --- TARJETAS --- */
+.team-card,
+.player-card,
+.event-card {
+  background: #23262f;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  max-width: 500px;
+  text-align: left;
+  transition: box-shadow 0.2s, background 0.2s;
+  border: 1px solid #282c34;
+}
+
+.team-card:hover,
+.player-card:hover,
+.event-card:hover {
+  box-shadow: 0 4px 24px rgba(30, 136, 229, 0.15);
+  background: #282c34;
+}
+
+/* --- ENCABEZADOS --- */
+.team-header,
+.player-header,
+.event-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.team-name,
+.player-name,
+.event-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a73e8;
+}
+
+/* --- IMÁGENES --- */
+.team-img,
+.player-img,
+.event-imgHomeTeam,
+.event-imgAwayTeam {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #23262f;
+  border: 2px solid #1a73e8;
+}
+
+/* --- DETALLES --- */
+.team-leagues,
+.player-details,
+.event-details {
+  margin-bottom: 1rem;
+}
+
+.team-league,
+.player-team,
+.player-position,
+.player-nacionality,
+.player-dateBorn,
+.player-status,
+.player-gender,
+.player-date,
+.event-league,
+.event-season,
+.event-homeTeam,
+.event-awayTeam,
+.event-homeScore,
+.event-awayScore,
+.event-location {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.team-stadium,
+.team-nickname,
+.team-location,
+.team-description {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #b0b3b8;
+}
+
+.event-date {
+  font-size: 1rem;
+  color: #b0b3b8;
+}
+
+/* --- IMÁGENES DE EVENTOS --- */
+.event-images {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+/*App.jsx*/
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #181a20;
+}
+
+.app-header {
+  padding: 2rem 0 1rem 0;
+  
+  border-bottom: 1px solid #282c34;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.app-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a73e8;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1a73e8;
+  background: #181a20;
+  color: #e0e0e0;
+  font-size: 1rem;
+  width: 320px;
+  transition: border 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #64b5f6;
+}
+
+.search-btn,
+.category-btn {
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.search-btn {
+  background: #1a73e8;
+  color: #fff;
+}
+
+.search-btn:hover {
+  background: #1565c0;
+}
+
+.category-btn {
+  background: #23262f;
+  color: #1a73e8;
+  border: 1px solid #1a73e8;
+}
+
+.category-btn:hover {
+  background: #1a73e8;
+  color: #fff;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-message {
+  font-size: 1.2rem;
+  color: #b0b3b8;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .app-header {
+    padding: 1rem 0;
   }
-  to {
-    transform: rotate(360deg);
+  .search-input {
+    width: 100%;
+    min-width: 180px;
+  }
+  .app-main {
+    padding: 1rem 0;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  #root {
+    padding: 1rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .team-card,
+  .player-card,
+  .event-card {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  .team-header,
+  .player-header,
+  .event-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

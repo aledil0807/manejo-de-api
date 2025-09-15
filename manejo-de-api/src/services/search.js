@@ -10,57 +10,60 @@ export const searchInput = async ({ search, category}) => {
   try {
     const response = await fetch(`https://www.thesportsdb.com/api/v1/json/123/search${modifiedCategory}.php?${modifiedCategory[0]}=${search}`)
     const json = await response.json()
-    const playersTeamsEvents = json.player || []
+    const players = json.player
+    const teams = json.teams
+    const events = json.event
     if (modifiedCategory === 'teams') {
       
 
-      return playersTeamsEvents?.map(playerTeamEvent => ({
-        id: playerTeamEvent.idTeam,
-        league: playerTeamEvent.strLeague,
-        league2: playerTeamEvent.strLeague2,
-        league3: playerTeamEvent.strLeague3,
-        league4: playerTeamEvent.strLeague4,
-        league5: playerTeamEvent.strLeague5,
-        stadium: playerTeamEvent.strStadium,
-        nickname: playerTeamEvent.strKeywords,
-        location: playerTeamEvent.strLocation,
-        descriptionES: playerTeamEvent.strDescriptionES,
-        img: playerTeamEvent.strBadge,
-        image: movie.Poster
+      return teams?.map(team => ({
+        id: team.idTeam,
+        name: team.strTeam,
+        league: team.strLeague,
+        league2: team.strLeague2,
+        league3: team.strLeague3,
+        league4: team.strLeague4,
+        league5: team.strLeague5,
+        stadium: team.strStadium,
+        nickname: team.strKeywords,
+        location: team.strLocation,
+        descriptionES: team.strDescriptionES,
+        img: team.strBadge,
+        
       }))
     }
 
     if (modifiedCategory === 'events') {
       
-      return playersTeamsEvents?.map(playerTeamEvent => ({
-        id: playerTeamEvent.idEvent,
-        name: playerTeamEvent.strEvent,
-        league: playerTeamEvent.strLeague,
-        season: playerTeamEvent.strSeason,
-        homeTeam: playerTeamEvent.strHomeTeam,
-        awayTeam: playerTeamEvent.strAwayTeam,
-        homeScore: playerTeamEvent.intHomeScore,
-        awayScore: playerTeamEvent.intAwayScore,
-        date: playerTeamEvent.dateEvent,
-        imgHomeTeam: playerTeamEvent.strHomeTeamBadge,
-        imgAwayTeam: playerTeamEvent.strAwayTeamBadge,
-        location: playerTeamEvent.strVenue
+      return events?.map(event => ({
+        id: event.idEvent,
+        name: event.strEvent,
+        league: event.strLeague,
+        season: event.strSeason,
+        homeTeam: event.strHomeTeam,
+        awayTeam: event.strAwayTeam,
+        homeScore: event.intHomeScore,
+        awayScore: event.intAwayScore,
+        date: event.dateEvent,
+        imgHomeTeam: event.strHomeTeamBadge,
+        imgAwayTeam: event.strAwayTeamBadge,
+        location: event.strVenue
       }))
     }
 
     if (modifiedCategory === 'players') {
       
-      return playersTeamsEvents?.map(playerTeamEvent => ({
-        id: playerTeamEvent.idPlayer,
-        name: playerTeamEvent.strPlayer,
-        team: playerTeamEvent.strTeam,
-        position: playerTeamEvent.strPosition,
-        nacionality: playerTeamEvent.strNationality,
-        dateBorn: playerTeamEvent.dateBorn,
-        status: playerTeamEvent.strStatus,
-        gender: playerTeamEvent.strGender,
-        date: playerTeamEvent.dateEvent,
-        img: playerTeamEvent.strThumb,
+      return players?.map(player => ({
+        id: player.idPlayer,
+        name: player.strPlayer,
+        team: player.strTeam,
+        position: player.strPosition,
+        nacionality: player.strNationality,
+        dateBorn: player.dateBorn,
+        status: player.strStatus,
+        gender: player.strGender,
+        date: player.dateEvent,
+        img: player.strThumb,
       }))
     }
 

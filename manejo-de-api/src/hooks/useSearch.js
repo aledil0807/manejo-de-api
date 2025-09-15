@@ -5,14 +5,16 @@ export function useSearch() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const previousSearch = useRef('');
+  const previousSearch = useRef({search: '', category: ''});
+  
 
   const getPlayer = useCallback(async ({ search, category }) => {
-    if (search === previousSearch.current) return;
+    if (search === previousSearch.current.search && category === previousSearch.current.category) return;
     
     setLoading(true);
     setError(null);
-    previousSearch.current = search;
+    previousSearch.current = {search, category};
+    
 
     try {
       const newPlayer = await searchInput({ search, category });

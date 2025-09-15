@@ -36,26 +36,32 @@ function App() {
   }
 
   return (
-    <>
-      <header>
-        <h1>Manejo de API</h1>
-        <form className='form' onSubmit={handleSubmit}>
-          <input onChange={handleChange} value={search} name='query' placeholder='Avengers, Star Wars, The Matrix...'/>
-          <button type='submit'>Buscar</button>
-          <button onClick={() => handleClick()}>by{category}</button>
-        </form>
-      </header>
+  <div className="app-container">
+    <header className="app-header">
+      <h1 className="app-title">Manejo de API</h1>
+      <form className="search-form" onSubmit={handleSubmit}>
+        <input
+          className="search-input"
+          onChange={handleChange}
+          value={search}
+          name="query"
+          placeholder="Lionel Messi, Inter de miami, Barcelona vs Real Madrid..."
+        />
+        <button className="search-btn" type="submit">Buscar</button>
+        <button className="category-btn" type="button" onClick={handleClick}>
+          by {category}
+        </button>
+      </form>
+    </header>
 
-      <main>
-        {loading? <p>Realiza una busqueda</p> : <Render playersTeamsEvents={players} />}
-      </main>
-
-      
-      
-      
-      
-    </>
-  )
+    <main className="app-main">
+      {loading
+        ? <p className="search-message">Realiza una búsqueda</p>
+        : <Render playersTeamsEvents={players} category={category} />
+      }
+    </main>
+  </div>
+)
 }
 
 export default App
